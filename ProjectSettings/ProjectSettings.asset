@@ -630,7 +630,7 @@ PlayerSettings:
     Nintendo Switch: UNITY_POST_PROCESSING_STACK_V2
     PS4: UNITY_POST_PROCESSING_STACK_V2
     Standalone: MANUAL_SHADER_STRIPPING;NODECANVAS
-    WebGL: UNITY_POST_PROCESSING_STACK_V2;MANUAL_SHADER_STRIPPING
+    WebGL: UNITY_POST_PROCESSING_STACK_V2;MANUAL_SHADER_STRIPPING;NODECANVAS;ODIN_INSPECTOR;ODIN_INSPECTOR_3;ODIN_INSPECTOR_3_1
     Windows Store Apps: UNITY_POST_PROCESSING_STACK_V2
     XboxOne: UNITY_POST_PROCESSING_STACK_V2
     iPhone: UNITY_POST_PROCESSING_STACK_V2
@@ -659,7 +659,7 @@ PlayerSettings:
   allowUnsafeCode: 0
   useDeterministicCompilation: 1
   enableRoslynAnalyzers: 1
-  selectedPlatform: 0
+  selectedPlatform: 2
   additionalIl2CppArgs: 
   scriptingRuntimeVersion: 1
   gcIncremental: 1
