@@ -1,0 +1,23 @@
+{
+    "name": "Lib.Runtime",
+    "rootNamespace": "",
+    "references": [
+        "UniTask",
+        "UniTask.Addressables",
+        "UniTask.TextMeshPro",
+        "UniTask.DOTween",
+        "Unity.TextMeshPro",
+        "DevLocker.Utils.SceneReference",
+        "DOTween.Modules",
+        "DOTweenPro.Scripts"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -38,12 +38,12 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &4
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 11
+  serializedVersion: 12
   m_GIWorkflowMode: 0
   m_GISettings:
     serializedVersion: 2
@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_LightingSettings: {fileID: 324598930}
 --- !u!196 &5
 NavMeshSettings:
   serializedVersion: 2
@@ -118,9 +118,73 @@ NavMeshSettings:
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
+    maxJobWorkers: 0
+    preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!850595691 &324598930
+LightingSettings:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Settings.lighting
+  serializedVersion: 4
+  m_GIWorkflowMode: 0
+  m_EnableBakedLightmaps: 1
+  m_EnableRealtimeLightmaps: 1
+  m_RealtimeEnvironmentLighting: 1
+  m_BounceScale: 1
+  m_AlbedoBoost: 1
+  m_IndirectOutputScale: 1
+  m_UsingShadowmask: 0
+  m_BakeBackend: 0
+  m_LightmapMaxSize: 1024
+  m_BakeResolution: 40
+  m_Padding: 2
+  m_LightmapCompression: 3
+  m_AO: 0
+  m_AOMaxDistance: 1
+  m_CompAOExponent: 0
+  m_CompAOExponentDirect: 0
+  m_ExtractAO: 0
+  m_MixedBakeMode: 1
+  m_LightmapsBakeMode: 1
+  m_FilterMode: 1
+  m_LightmapParameters: {fileID: 15204, guid: 0000000000000000f000000000000000, type: 0}
+  m_ExportTrainingData: 0
+  m_TrainingDataDestination: TrainingData
+  m_RealtimeResolution: 2
+  m_ForceWhiteAlbedo: 0
+  m_ForceUpdates: 0
+  m_FinalGather: 0
+  m_FinalGatherRayCount: 1024
+  m_FinalGatherFiltering: 1
+  m_PVRCulling: 1
+  m_PVRSampling: 1
+  m_PVRDirectSampleCount: 32
+  m_PVRSampleCount: 512
+  m_PVREnvironmentSampleCount: 512
+  m_PVREnvironmentReferencePointCount: 2048
+  m_LightProbeSampleCountMultiplier: 4
+  m_PVRBounces: 2
+  m_PVRMinBounces: 2
+  m_PVREnvironmentMIS: 0
+  m_PVRFilteringMode: 0
+  m_PVRDenoiserTypeDirect: 0
+  m_PVRDenoiserTypeIndirect: 0
+  m_PVRDenoiserTypeAO: 0
+  m_PVRFilterTypeDirect: 0
+  m_PVRFilterTypeIndirect: 0
+  m_PVRFilterTypeAO: 0
+  m_PVRFilteringGaussRadiusDirect: 1
+  m_PVRFilteringGaussRadiusIndirect: 5
+  m_PVRFilteringGaussRadiusAO: 2
+  m_PVRFilteringAtrousPositionSigmaDirect: 0.5
+  m_PVRFilteringAtrousPositionSigmaIndirect: 2
+  m_PVRFilteringAtrousPositionSigmaAO: 1
+  m_PVRTiledBaking: 0
 --- !u!1 &430180924
 GameObject:
   m_ObjectHideFlags: 0
@@ -131,6 +195,7 @@ GameObject:
   m_Component:
   - component: {fileID: 430180926}
   - component: {fileID: 430180925}
+  - component: {fileID: 430180927}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -197,6 +262,7 @@ Light:
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!4 &430180926
@@ -209,10 +275,31 @@ Transform:
   m_LocalRotation: {x: 0.40821794, y: -0.23456973, z: 0.109381676, w: 0.87542605}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &430180927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 430180924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!1001 &632272871
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -368,10 +455,12 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -396,6 +485,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!64 &898012731
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -428,6 +518,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2.3412437, y: 2.3412433, z: 2.3412433}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -487,19 +578,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _serializedExposedParameters: []
-  _boundGraphSerialization: '{"type":"NodeCanvas.BehaviourTrees.BehaviourTree","nodes":[{"policy":2,"_position":{"x":5488.0,"y":4980.0},"_comment":"Execute
-    movement and Trigger checking in parallel","$type":"NodeCanvas.BehaviourTrees.Parallel","$id":"0"},{"repeaterMode":2,"repeatTimes":{"_value":1},"_position":{"x":5280.0,"y":5130.0},"_comment":"Repeat
-    the movement forever","$type":"NodeCanvas.BehaviourTrees.Repeater","$id":"1"},{"_action":{"actions":[{"xAxisName":{"_value":"Horizontal"},"yAxisName":{},"zAxisName":{"_value":"Vertical"},"multiplier":{"_value":3.0},"saveAs":{"_name":""},"saveXAs":{"_name":"xInput","_targetVariableID":"45025cac-e574-4efe-b8aa-1a6c6618641a"},"saveYAs":{"_name":""},"saveZAs":{"_name":""},"$type":"NodeCanvas.Tasks.Actions.GetInputAxis"},{"strafe":{"_name":"xInput","_targetVariableID":"45025cac-e574-4efe-b8aa-1a6c6618641a"},"turn":{"_name":""},"forward":{"_name":""},"up":{},"moveSpeed":{"_value":1.0},"rotationSpeed":{"_value":1.0},"$type":"NodeCanvas.Tasks.Actions.InputMove"}],"$type":"NodeCanvas.Framework.ActionList"},"_position":{"x":5280.0,"y":5205.0},"_comment":"Move
-    left-right","$type":"NodeCanvas.BehaviourTrees.ActionNode","$id":"2"},{"dynamic":true,"_position":{"x":5655.0,"y":5130.0},"$type":"NodeCanvas.BehaviourTrees.Selector","$id":"3"},{"dynamic":true,"_position":{"x":5550.0,"y":5250.0},"$type":"NodeCanvas.BehaviourTrees.Sequencer","$id":"4"},{"_condition":{"checkType":2,"saveGameObjectAs":{"_name":""},"$type":"NodeCanvas.Tasks.Conditions.CheckTrigger"},"_position":{"x":5475.0,"y":5355.0},"$type":"NodeCanvas.BehaviourTrees.ConditionNode","$id":"5"},{"_action":{"log":{"_value":"Inside"},"$type":"NodeCanvas.Tasks.Actions.DebugLogText"},"_position":{"x":5610.0,"y":5355.0},"$type":"NodeCanvas.BehaviourTrees.ActionNode","$id":"6"},{"_action":{"log":{"_value":"Outside"},"$type":"NodeCanvas.Tasks.Actions.DebugLogText"},"_position":{"x":5745.0,"y":5250.0},"$type":"NodeCanvas.BehaviourTrees.ActionNode","$id":"7"}],"connections":[{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"1"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"3"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"1"},"_targetNode":{"$ref":"2"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"3"},"_targetNode":{"$ref":"4"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"3"},"_targetNode":{"$ref":"7"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"4"},"_targetNode":{"$ref":"5"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"4"},"_targetNode":{"$ref":"6"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"}],"canvasGroups":[],"localBlackboard":{"_variables":{}},"derivedData":{"repeat":true,"$type":"NodeCanvas.BehaviourTrees.BehaviourTree+DerivedSerializationData"}}'
+  _boundGraphSerialization: '{"type":"NodeCanvas.BehaviourTrees.BehaviourTree","nodes":[{"_position":{"x":5019.706,"y":5032.12},"$type":"NodeCanvas.BehaviourTrees.Sequencer","$id":"0"},{"policy":1,"_position":{"x":4920.433,"y":5120.373},"$type":"NodeCanvas.BehaviourTrees.Parallel","$id":"1"},{"_action":{"log":{"_value":"2"},"$type":"NodeCanvas.Tasks.Actions.DebugLogText"},"_position":{"x":5063.964,"y":5253.539},"$type":"NodeCanvas.BehaviourTrees.ActionNode","$id":"2"},{"_action":{"log":{"_value":"2"},"finishStatus":0,"$type":"NodeCanvas.Tasks.Actions.DebugLogText"},"_position":{"x":4926.996,"y":5253.401},"$type":"NodeCanvas.BehaviourTrees.ActionNode","$id":"3"},{"_action":{"log":{"_value":"1"},"finishStatus":0,"$type":"NodeCanvas.Tasks.Actions.DebugLogText"},"_position":{"x":4715.812,"y":5250.943},"$type":"NodeCanvas.BehaviourTrees.ActionNode","$id":"4"},{"_action":{"log":{"_value":"111111"},"$type":"NodeCanvas.Tasks.Actions.DebugLogText"},"_position":{"x":5021.059,"y":5167.943},"$type":"NodeCanvas.BehaviourTrees.ActionNode","$id":"5"},{"policy":2,"_position":{"x":5489.0,"y":4980.0},"_comment":"Execute
+    movement and Trigger checking in parallel","$type":"NodeCanvas.BehaviourTrees.Parallel","$id":"6"},{"repeaterMode":2,"repeatTimes":{"_value":1},"_position":{"x":5280.0,"y":5130.0},"_comment":"Repeat
+    the movement forever","$type":"NodeCanvas.BehaviourTrees.Repeater","$id":"7"},{"_action":{"actions":[{"xAxisName":{"_value":"Horizontal"},"yAxisName":{},"zAxisName":{"_value":"Vertical"},"multiplier":{"_value":3.0},"saveAs":{"_name":""},"saveXAs":{"_name":"xInput","_targetVariableID":"45025cac-e574-4efe-b8aa-1a6c6618641a"},"saveYAs":{"_name":""},"saveZAs":{"_name":""},"$type":"NodeCanvas.Tasks.Actions.GetInputAxis"},{"strafe":{"_name":"xInput","_targetVariableID":"45025cac-e574-4efe-b8aa-1a6c6618641a"},"turn":{"_name":""},"forward":{"_name":""},"up":{},"moveSpeed":{"_value":1.0},"rotationSpeed":{"_value":1.0},"$type":"NodeCanvas.Tasks.Actions.InputMove"}],"$type":"NodeCanvas.Framework.ActionList"},"_position":{"x":5280.0,"y":5205.0},"_comment":"Move
+    left-right","$type":"NodeCanvas.BehaviourTrees.ActionNode","$id":"8"},{"dynamic":true,"_position":{"x":5655.0,"y":5130.0},"$type":"NodeCanvas.BehaviourTrees.Selector","$id":"9"},{"dynamic":true,"_position":{"x":5550.0,"y":5250.0},"$type":"NodeCanvas.BehaviourTrees.Sequencer","$id":"10"},{"_condition":{"checkType":2,"saveGameObjectAs":{"_name":""},"$type":"NodeCanvas.Tasks.Conditions.CheckTrigger"},"_position":{"x":5475.0,"y":5355.0},"$type":"NodeCanvas.BehaviourTrees.ConditionNode","$id":"11"},{"_action":{"log":{"_value":"Inside"},"$type":"NodeCanvas.Tasks.Actions.DebugLogText"},"_position":{"x":5610.0,"y":5355.0},"$type":"NodeCanvas.BehaviourTrees.ActionNode","$id":"12"},{"_action":{"log":{"_value":"Outside"},"$type":"NodeCanvas.Tasks.Actions.DebugLogText"},"_position":{"x":5745.0,"y":5250.0},"$type":"NodeCanvas.BehaviourTrees.ActionNode","$id":"13"}],"connections":[{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"1"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"0"},"_targetNode":{"$ref":"5"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"1"},"_targetNode":{"$ref":"2"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"1"},"_targetNode":{"$ref":"3"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"1"},"_targetNode":{"$ref":"4"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"6"},"_targetNode":{"$ref":"7"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"6"},"_targetNode":{"$ref":"9"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"7"},"_targetNode":{"$ref":"8"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"9"},"_targetNode":{"$ref":"10"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"9"},"_targetNode":{"$ref":"13"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"10"},"_targetNode":{"$ref":"11"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"},{"_sourceNode":{"$ref":"10"},"_targetNode":{"$ref":"12"},"$type":"NodeCanvas.BehaviourTrees.BTConnection"}],"canvasGroups":[],"localBlackboard":{"_variables":{}},"derivedData":{"$type":"NodeCanvas.BehaviourTrees.BehaviourTree+DerivedSerializationData"}}'
   _boundGraphObjectReferences: []
   _boundGraphSource:
-    _version: 3.25
+    _version: 3.26
     _category: 
     _comments: This is a simple if the else pattern with a trigger stay condition.
       Having the selector and sequencer Dynamic allows for the condition change to
       take effect immediately. Using left-right arrows, moves the cube.
-    _translation: {x: -4885, y: -4708}
-    _zoomFactor: 1
+    _translation: {x: -3792.8743, y: -4074.871}
+    _zoomFactor: 0.85009056
   _firstActivation: 2
   _enableAction: 0
   _disableAction: 0
@@ -519,10 +610,12 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -547,6 +640,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &1224045428
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -578,6 +672,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.27, y: 0.39, z: -0.61}
   m_LocalScale: {x: 0.7013932, y: 0.7013929, z: 0.7013929}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -686,6 +781,7 @@ Transform:
   m_LocalRotation: {x: 0.27114204, y: 0, z: 0, w: 0.9625394}
   m_LocalPosition: {x: 0, y: 6.74, z: -9.29}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -720,10 +816,12 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -748,6 +846,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &2023775113
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -779,6 +878,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.97, y: 1.27, z: -0.74}
   m_LocalScale: {x: 2.6084812, y: 2.6084802, z: 2.6084802}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3

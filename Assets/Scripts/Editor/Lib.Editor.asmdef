@@ -1,0 +1,19 @@
+{
+    "name": "Lib.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:fc298464ddee91643808c00b329c9a6d",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

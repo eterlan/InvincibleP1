@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.cysharp.unitask": {
+      "version": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "f2773f585e762480c835ac718b82b87cb111e500"
+    },
     "com.unity.burst": {
       "version": "1.8.4",
       "depth": 1,
@@ -211,6 +218,13 @@
         "com.unity.modules.jsonserialize": "1.0.0"
       },
       "url": "https://packages.unity.cn"
+    },
+    "devlocker.utils.scenereference": {
+      "version": "https://github.com/NibbleByte/UnitySceneReference.git#upm",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "5b03b96565ed12d119e071e9ba8d0bcf0b02bc25"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",
