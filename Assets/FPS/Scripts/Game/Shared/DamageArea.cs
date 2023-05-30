@@ -9,7 +9,7 @@ namespace Unity.FPS.Game
         public float AreaOfEffectDistance = 5f;
 
         [Tooltip("Damage multiplier over distance for area of effect")]
-        public AnimationCurve DamageRatioOverDistance;
+        public AnimationCurve DamageRatioOverDistance = AnimationCurve.Linear(0, 1, 1, 1);
 
         [Header("Debug")] [Tooltip("Color of the area of effect radius")]
         public Color AreaOfEffectColor = Color.red * 0.5f;

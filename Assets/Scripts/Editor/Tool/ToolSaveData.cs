@@ -25,6 +25,16 @@ namespace Lib.Editor.Tool
         {
             var asset    = AssetDatabase.LoadAssetAtPath<ScriptableObject>(EDITOR_SAVE_DATA_PATH);
             var saveData = (ToolSaveData)asset;
+            if (!asset)
+            {
+                saveData = CreateInstance<ToolSaveData>();
+                if (!AssetDatabase.IsValidFolder("Assets/Settings"))
+                {
+                    AssetDatabase.CreateFolder("Assets", "Settings");
+                }
+                AssetDatabase.CreateAsset(saveData, EDITOR_SAVE_DATA_PATH);    
+            }
+
             var success  = saveData.dict.TryGetValue(key, out var json);
             if (success)
             { 

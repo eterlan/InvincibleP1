@@ -43,8 +43,8 @@ namespace Unity.FPS.Gameplay
             "Distance over which the projectile will correct its course to fit the intended trajectory (used to drift projectiles towards center of screen in First Person view). At values under 0, there is no correction")]
         public float TrajectoryCorrectionDistance = -1;
 
-        [Tooltip("Determines if the projectile inherits the velocity that the weapon's muzzle had when firing")]
-        public bool InheritWeaponVelocity = false;
+        // [Tooltip("Determines if the projectile inherits the velocity that the weapon's muzzle had when firing")]
+        // public bool InheritWeaponVelocity = false;
 
         [Header("Damage")] [Tooltip("Damage of the projectile")]
         public float Damage = 40f;
@@ -54,6 +54,30 @@ namespace Unity.FPS.Gameplay
 
         [Header("Debug")] [Tooltip("Color of the projectile radius debug view")]
         public Color RadiusColor = Color.cyan * 0.2f;
+
+        [Header("指定发射方向")]
+        public bool hasInitDir;
+
+        [Header("Tracking")]
+        public bool isAutoTrack;
+        public Transform target;
+        public float     maxSpeed = 20;
+        public float     maxAngleSpeed = 100;
+
+        public float          toMaxSpeedTime      = 2;
+        public float          toMaxAngleSpeedTime = 2;
+        public AnimationCurve toMaxSpeedCurve;
+        public AnimationCurve toMaxAngleSpeedCurve;
+
+        public float   initSpeed        = 10;
+        public Vector3 initTransform    = Vector3.up;
+        public float   randomAngleRange = 30;
+    
+        [Header("runtime")]
+        public float speed;
+        public float angleSpeed;
+        public float elapsedTime;
+
 
         ProjectileBase m_ProjectileBase;
         Vector3 m_LastRootPosition;
@@ -75,6 +99,16 @@ namespace Unity.FPS.Gameplay
             m_ProjectileBase.OnShoot += OnShoot;
 
             Destroy(gameObject, MaxLifeTime);
+            var actorManager = FindObjectOfType<ActorsManager>();
+            if (actorManager != null)
+            {
+                target = actorManager.Player.GetComponent<Actor>().AimPoint;
+            }
+            else
+            {
+                enabled = false;
+                return;
+            }
         }
 
         new void OnShoot()
@@ -119,16 +153,44 @@ namespace Unity.FPS.Gameplay
                     }
                 }
             }
+
+            speed = initSpeed;
+            if (hasInitDir)
+            {
+                transform.forward = initTransform;
+                transform.Rotate(new Vector3(GetRandomAngle(), GetRandomAngle(), 0));
+
+                float GetRandomAngle()
+                {
+                    return Random.Range(-randomAngleRange, randomAngleRange);
+                }
+            }
         }
+
 
         void Update()
         {
+
             // Move
-            transform.position += m_Velocity * Time.deltaTime;
-            if (InheritWeaponVelocity)
+            var deltaTime = Time.deltaTime;
+
+            if (isAutoTrack)
             {
-                transform.position += m_ProjectileBase.InheritedMuzzleVelocity * Time.deltaTime;
+                AutoTrack();
             }
+            
+            // Gravity
+            if (GravityDownAcceleration > 0)
+            {
+                // add gravity to the projectile velocity for ballistic effect
+                m_Velocity += Vector3.down * GravityDownAcceleration * deltaTime;
+            }
+
+            transform.position += m_Velocity * deltaTime;
+            // if (InheritWeaponVelocity)
+            // {
+            //     transform.position += m_ProjectileBase.InheritedMuzzleVelocity * deltaTime;
+            // }
 
             // Drift towards trajectory override (this is so that projectiles can be centered 
             // with the camera center even though the actual weapon is offset)
@@ -154,12 +216,7 @@ namespace Unity.FPS.Gameplay
             // Orient towards velocity
             transform.forward = m_Velocity.normalized;
 
-            // Gravity
-            if (GravityDownAcceleration > 0)
-            {
-                // add gravity to the projectile velocity for ballistic effect
-                m_Velocity += Vector3.down * GravityDownAcceleration * Time.deltaTime;
-            }
+
 
             // Hit detection
             {
@@ -195,6 +252,22 @@ namespace Unity.FPS.Gameplay
             }
 
             m_LastRootPosition = Root.position;
+            
+            void AutoTrack()
+            {
+                elapsedTime += deltaTime;
+            
+                var speedLerp = toMaxSpeedCurve.Evaluate(elapsedTime / toMaxSpeedTime);
+                speed = Mathf.Lerp(speed, maxSpeed, speedLerp);
+        
+                var angleSpeedLerp = toMaxAngleSpeedCurve.Evaluate(elapsedTime / toMaxAngleSpeedTime);
+                angleSpeed = Mathf.Lerp(angleSpeed, maxAngleSpeed, angleSpeedLerp);
+        
+                // Modify position and Rotation;
+
+                var targetDir = target.position - transform.position;
+                m_Velocity = Vector3.RotateTowards(transform.forward, targetDir, Mathf.Deg2Rad * angleSpeed * deltaTime, 0).normalized * speed;
+            }
         }
 
         bool IsHitValid(RaycastHit hit)

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3659995153115176982}
   - component: {fileID: 8924682559891268397}
+  - component: {fileID: -5734646522830962984}
   m_Layer: 0
   m_Name: Projectile_Hoverbot
   m_TagString: Untagged
@@ -57,13 +58,120 @@ MonoBehaviour:
   HittableLayers:
     serializedVersion: 2
     m_Bits: 3383
-  Speed: 100
+  Speed: 10
   GravityDownAcceleration: 0
   TrajectoryCorrectionDistance: 5
-  InheritWeaponVelocity: 0
   Damage: 10
-  AreaOfDamage: {fileID: 0}
+  AreaOfDamage: {fileID: -5734646522830962984}
   RadiusColor: {r: 0, g: 1, b: 1, a: 1}
+  hasInitDir: 0
+  isAutoTrack: 1
+  target: {fileID: 0}
+  maxSpeed: 20
+  maxAngleSpeed: 300
+  toMaxSpeedTime: 2
+  toMaxAngleSpeedTime: 2
+  toMaxSpeedCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: -0.0033101623
+      outSlope: -0.0033101623
+      tangentMode: 0
+      weightedMode: 2
+      inWeight: 0
+      outWeight: 0.7125
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  toMaxAngleSpeedCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.005028883
+      outSlope: 0.08845295
+      tangentMode: 65
+      weightedMode: 2
+      inWeight: 0
+      outWeight: 0.39996076
+    - serializedVersion: 3
+      time: 0.29423508
+      value: 0.02602596
+      inSlope: 0.23851442
+      outSlope: 0.23851442
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.23500456
+      outWeight: 0.3409895
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1.3800262
+      outSlope: 1.3800262
+      tangentMode: 34
+      weightedMode: 1
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  initSpeed: 10
+  initTransform: {x: 0, y: 1, z: 0}
+  randomAngleRange: 45
+  speed: 0
+  angleSpeed: 0
+  elapsedTime: 0
+--- !u!114 &-5734646522830962984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3659995153115176983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0244d6b9e98532469c7be0732490a61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AreaOfEffectDistance: 2
+  DamageRatioOverDistance:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -0.004528313
+      outSlope: -0.004528313
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.5208333
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -2.8867912
+      outSlope: -2.8867912
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.041666687
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  AreaOfEffectColor: {r: 0.5, g: 0, b: 0, a: 0.5}
 --- !u!1 &5564024855854763701
 GameObject:
   m_ObjectHideFlags: 0

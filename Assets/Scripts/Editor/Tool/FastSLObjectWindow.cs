@@ -10,7 +10,8 @@ using Object = UnityEngine.Object;
 
 namespace Lib.Editor.Tool
 {
-    // TODO 不知道为什么删除的时候用快捷键会报错, 用按钮就没事..
+    // TODO 到时候买一下那个history的，或者自己感兴趣就做？
+    // TODO 不买的话支持一下场景物体、增加快捷键 del
     public class FastSLObjectWindow : EditorWindow
     {
         private SerializedObject windowSO;
@@ -206,10 +207,10 @@ namespace Lib.Editor.Tool
                 }
                 windowSO.Update();
 
-                if (GUILayout.Button("读取"))
-                {
-                    Load();
-                }
+                // if (GUILayout.Button("读取"))
+                // {
+                //     Load();
+                // } 
                 
                 if (GUILayout.Button("保存当前选中物体")) 
                     AddToList();
