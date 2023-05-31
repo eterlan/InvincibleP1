@@ -51,13 +51,13 @@ namespace Lib.Editor.Tool
             var isOpen = HasOpenInstances<FastSLObjectWindow>();
             if (isOpen)
             {
-                var window = GetWindow<FastSLObjectWindow>();
+                var window = GetWindow<FastSLObjectWindow>("Favorites");
                 window.position = new Rect(window.position.x, window.position.y, window.windowSize.x, window.windowSize.y);
                 window.AddToList();
             }
             else
             {
-                GetWindow<FastSLObjectWindow>();
+                GetWindow<FastSLObjectWindow>("Favorites");
                 Event.current.Use();
             }
         }

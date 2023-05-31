@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Unity.FPS.Game;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 namespace Unity.FPS.AI
 {
@@ -443,8 +445,9 @@ namespace Unity.FPS.AI
 
         void FindAndInitializeAllWeapons()
         {
+            
             // Check if we already found and initialized the weapons
-            if (m_Weapons == null)
+            if (m_Weapons == null || m_Weapons.Length == 0)
             {
                 m_Weapons = GetComponentsInChildren<WeaponController>();
                 DebugUtility.HandleErrorIfNoComponentFound<WeaponController, EnemyController>(m_Weapons.Length, this,
@@ -476,7 +479,15 @@ namespace Unity.FPS.AI
         void SetCurrentWeapon(int index)
         {
             m_CurrentWeaponIndex = index;
-            m_CurrentWeapon = m_Weapons[m_CurrentWeaponIndex];
+            try
+            {
+                m_CurrentWeapon = m_Weapons[m_CurrentWeaponIndex];
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
             if (SwapToNextWeapon)
             {
                 m_LastTimeWeaponSwapped = Time.time;

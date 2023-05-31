@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using Unity.FPS.Game;
 using UnityEngine;
 using UnityEngine.Events;
@@ -71,6 +72,13 @@ namespace Unity.FPS.Gameplay
 
         [Tooltip("Layer to set FPS weapon gameObjects to")]
         public LayerMask FpsWeaponLayer;
+        
+        [Header("DropWeapon")]
+        public Vector3 initDropSpeed = new Vector3(0, 10, 5);
+        public  float   gravity  = -9.8f;
+        public  float   dropTime = 1;
+        private float   dropElapsedTime;
+        private Vector3 m_velocity;
 
         public bool IsAiming { get; private set; }
         public bool IsPointingAtEnemy { get; private set; }
@@ -118,7 +126,24 @@ namespace Unity.FPS.Gameplay
 
             SwitchWeapon(true);
         }
-
+        
+        private async UniTaskVoid DropWeapon(WeaponController activeWeapon)
+        {
+            var deltaTime = Time.deltaTime;
+            m_velocity = initDropSpeed;
+            activeWeapon.transform.SetParent(null);
+            while (dropElapsedTime < dropTime)
+            {
+                Debug.Log(dropElapsedTime);
+                dropElapsedTime += deltaTime;
+                m_velocity.y += gravity                  * deltaTime;
+                var worldSpaceTranslation = activeWeapon.transform.TransformVector(m_velocity * deltaTime);
+                activeWeapon.transform.position += worldSpaceTranslation;
+                await UniTask.DelayFrame(1);
+            }
+            RemoveWeapon(activeWeapon);
+        }
+        
         void Update()
         {
             // shoot handling
@@ -127,6 +152,11 @@ namespace Unity.FPS.Gameplay
             if (activeWeapon != null && activeWeapon.IsReloading)
                 return;
 
+            if (activeWeapon != null && m_InputHandler.GetDropButtonDown())
+            {
+                DropWeapon(activeWeapon).Forget();
+            }
+            
             if (activeWeapon != null && m_WeaponSwitchState == WeaponSwitchState.Up)
             {
                 if (!activeWeapon.AutomaticReload && m_InputHandler.GetReloadButtonDown() && activeWeapon.CurrentAmmoRatio < 1.0f)

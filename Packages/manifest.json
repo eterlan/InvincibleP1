@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
+    "com.marijnzwemmer.unity-toolbar-extender": "https://github.com/marijnz/unity-toolbar-extender.git",
     "com.singularitygroup.hotreload": "git+https://gitlab.hotreload.net/root/hot-reload-releases.git#1.10.12",
     "com.unity.connect.share": "4.2.3",
     "com.unity.feature.development": "1.0.1",
@@ -15,6 +16,7 @@
     "com.unity.timeline": "1.6.4",
     "com.unity.ugui": "1.0.0",
     "com.unity.visualscripting": "1.8.0",
+    "com.xjine.time_scale_editor": "https://github.com/XJINE/Unity_TimeScaleEditor.git?path=Assets/TimeScaleEditor",
     "devlocker.utils.scenereference": "https://github.com/NibbleByte/UnitySceneReference.git#upm",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",

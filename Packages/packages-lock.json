@@ -7,6 +7,13 @@
       "dependencies": {},
       "hash": "f2773f585e762480c835ac718b82b87cb111e500"
     },
+    "com.marijnzwemmer.unity-toolbar-extender": {
+      "version": "https://github.com/marijnz/unity-toolbar-extender.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "dbd76ed996483d219c39d240f785b1790aa039ed"
+    },
     "com.singularitygroup.hotreload": {
       "version": "git+https://gitlab.hotreload.net/root/hot-reload-releases.git#1.10.12",
       "depth": 0,
@@ -228,6 +235,13 @@
         "com.unity.modules.jsonserialize": "1.0.0"
       },
       "url": "https://packages.unity.cn"
+    },
+    "com.xjine.time_scale_editor": {
+      "version": "https://github.com/XJINE/Unity_TimeScaleEditor.git?path=Assets/TimeScaleEditor",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "9b554a0f6c44765c18eac87c398179dff67d333f"
     },
     "devlocker.utils.scenereference": {
       "version": "https://github.com/NibbleByte/UnitySceneReference.git#upm",
