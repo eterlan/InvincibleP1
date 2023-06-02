@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
-namespace Unity.FPS.Game
+namespace FPS.Scripts.Game.Shared
 {
     public enum WeaponShootType
     {
@@ -70,7 +71,10 @@ namespace Unity.FPS.Game
         [Tooltip("Translation to apply to weapon arm when aiming with this weapon")]
         public Vector3 AimOffset;
 
+        [FormerlySerializedAs("NoReload")]
         [Header("Ammo Parameters")]
+        [Tooltip("是否有装弹能力")]
+        public bool CannotReload;
         [Tooltip("Should the player manually reload")]
         public bool AutomaticReload = true;
         [Tooltip("Has physical clip on the weapon and ammo shells are ejected when firing")]
@@ -249,7 +253,7 @@ namespace Unity.FPS.Game
 
         void UpdateAmmo()
         {
-            if (AutomaticReload && m_LastTimeShot + AmmoReloadDelay < Time.time && m_CurrentAmmo < MaxAmmo && !IsCharging)
+            if (!CannotReload && AutomaticReload && m_LastTimeShot + AmmoReloadDelay < Time.time && m_CurrentAmmo < MaxAmmo && !IsCharging)
             {
                 // reloads weapon over time
                 m_CurrentAmmo += AmmoReloadRate * Time.deltaTime;

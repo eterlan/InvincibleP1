@@ -1,4 +1,4 @@
-﻿using Unity.FPS.Game;
+﻿using FPS.Scripts.Game.Shared;
 using UnityEngine;
 
 namespace Unity.FPS.Gameplay

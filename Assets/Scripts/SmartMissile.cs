@@ -1,6 +1,6 @@
 using System;
+using FPS.Scripts.Game.Managers;
 using Sirenix.OdinInspector;
-using Unity.FPS.Game;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;

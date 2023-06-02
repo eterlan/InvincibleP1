@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using FPS.Scripts.Game;
+using FPS.Scripts.Game.Shared;
 using Unity.FPS.AI;
-using Unity.FPS.Game;
 using Unity.FPS.Gameplay;
 using UnityEditor;
 using UnityEngine;

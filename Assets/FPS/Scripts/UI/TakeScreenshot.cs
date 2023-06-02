@@ -1,5 +1,5 @@
 ﻿using System.IO;
-using Unity.FPS.Game;
+using FPS.Scripts.Game;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif

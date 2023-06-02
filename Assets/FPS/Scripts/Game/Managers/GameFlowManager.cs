@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Unity.FPS.Game
+namespace FPS.Scripts.Game.Managers
 {
     public class GameFlowManager : MonoBehaviour
     {
@@ -73,6 +73,10 @@ namespace Unity.FPS.Game
 
             // Remember that we need to load the appropriate end scene after a delay
             GameIsEnding = true;
+
+            var arg = Events.GameOverEvent;
+            arg.Win = win;
+            EventManager.Broadcast(arg);
             EndGameFadeCanvasGroup.gameObject.SetActive(true);
             if (win)
             {

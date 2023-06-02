@@ -1,5 +1,5 @@
-﻿using Unity.FPS.AI;
-using Unity.FPS.Game;
+﻿using FPS.Scripts.Game;
+using Unity.FPS.AI;
 using UnityEngine;
 using UnityEngine.UI;
 

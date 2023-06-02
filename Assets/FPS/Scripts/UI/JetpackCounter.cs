@@ -1,4 +1,4 @@
-﻿using Unity.FPS.Game;
+﻿using FPS.Scripts.Game;
 using Unity.FPS.Gameplay;
 using UnityEngine;
 using UnityEngine.UI;

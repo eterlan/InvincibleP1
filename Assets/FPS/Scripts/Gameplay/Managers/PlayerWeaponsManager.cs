@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using Unity.FPS.Game;
+using FPS.Scripts.Game;
+using FPS.Scripts.Game.Shared;
+using FPS.Scripts.Gameplay;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -129,19 +131,26 @@ namespace Unity.FPS.Gameplay
         
         private async UniTaskVoid DropWeapon(WeaponController activeWeapon)
         {
-            var deltaTime = Time.deltaTime;
             m_velocity = initDropSpeed;
+
+            if (activeWeapon.TryGetComponent<AbilityBase>(out var ability))
+            {
+                ability.Apply(this).Forget();
+            }
+            
+            RemoveWeapon(activeWeapon);
             activeWeapon.transform.SetParent(null);
             while (dropElapsedTime < dropTime)
             {
-                Debug.Log(dropElapsedTime);
+                var deltaTime = Time.deltaTime;
                 dropElapsedTime += deltaTime;
                 m_velocity.y += gravity                  * deltaTime;
                 var worldSpaceTranslation = activeWeapon.transform.TransformVector(m_velocity * deltaTime);
                 activeWeapon.transform.position += worldSpaceTranslation;
                 await UniTask.DelayFrame(1);
             }
-            RemoveWeapon(activeWeapon);
+            
+            Destroy(activeWeapon.gameObject);
         }
         
         void Update()
@@ -260,7 +269,7 @@ namespace Unity.FPS.Gameplay
                     }
                 }
             }
-
+            
             // Handle switching to the new weapon index
             SwitchToWeaponIndex(newWeaponIndex);
         }
@@ -522,13 +531,17 @@ namespace Unity.FPS.Gameplay
                     {
                         OnRemovedWeapon.Invoke(weaponInstance, i);
                     }
-
-                    Destroy(weaponInstance.gameObject);
-
+                    
                     // Handle case of removing active weapon (switch to next weapon)
                     if (i == ActiveWeaponIndex)
                     {
                         SwitchWeapon(true);
+                    }
+
+                    // hard-code to prevent pick up gun not showing when no weapon.
+                    if (GetActiveWeapon() == null)
+                    {
+                        ActiveWeaponIndex = m_WeaponSlots.Length - 1;
                     }
 
                     return true;

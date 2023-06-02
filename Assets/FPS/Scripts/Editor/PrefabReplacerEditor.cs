@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Unity.FPS.Game;
+using FPS.Scripts.Game;
 using UnityEngine;
 using UnityEditor;
 

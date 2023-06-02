@@ -111,14 +111,38 @@ MonoBehaviour:
   ImpactSfxClip: {fileID: 8300000, guid: cba089de3eef16d46baeda4077140a74, type: 3}
   HittableLayers:
     serializedVersion: 2
-    m_Bits: 3383
+    m_Bits: 11575
   Speed: 30
   GravityDownAcceleration: 300
   TrajectoryCorrectionDistance: -1
-  InheritWeaponVelocity: 0
   Damage: 40
   AreaOfDamage: {fileID: 1203337828444365110}
   RadiusColor: {r: 0, g: 1, b: 1, a: 0.49803922}
+  hasInitDir: 0
+  isAutoTrack: 0
+  target: {fileID: 0}
+  maxSpeed: 20
+  maxAngleSpeed: 100
+  toMaxSpeedTime: 2
+  toMaxAngleSpeedTime: 2
+  toMaxSpeedCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  toMaxAngleSpeedCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  initSpeed: 10
+  initTransform: {x: 0, y: 1, z: 0}
+  randomAngleRange: 30
+  speed: 0
+  angleSpeed: 0
+  elapsedTime: 0
 --- !u!114 &1203337828444365110
 MonoBehaviour:
   m_ObjectHideFlags: 0

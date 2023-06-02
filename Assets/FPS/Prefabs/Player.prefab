@@ -409,7 +409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dac5ddb3ce9b8884ca9588dc620ffcab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LookSensitivity: 1
+  LookSensitivity: 0.25
   WebglLookSensitivityMultiplier: 0.25
   TriggerAxisThreshold: 0.4
   InvertYAxis: 0
@@ -431,7 +431,7 @@ MonoBehaviour:
   GravityDownForce: 20
   GroundCheckLayers:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 8193
   GroundCheckDistance: 1
   MaxSpeedOnGround: 13
   MovementSharpnessOnGround: 15
@@ -439,6 +439,7 @@ MonoBehaviour:
   MaxSpeedInAir: 10
   AccelerationSpeedInAir: 25
   SprintSpeedModifier: 1.5
+  externalSpeedModifier: 1
   KillHeight: -50
   RotationSpeed: 200
   AimingRotationMultiplier: 0.4
@@ -458,6 +459,95 @@ MonoBehaviour:
   MaxSpeedForFallDamage: 40
   FallDamageAtMinSpeed: 10
   FallDamageAtMaxSpeed: 30
+  sprintCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.1779162
+      value: 1.0550992
+      inSlope: -0.008114
+      outSlope: -0.008114
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.58648336
+      outWeight: 0.43302444
+    - serializedVersion: 3
+      time: 0.83049315
+      value: 0.8087535
+      inSlope: -0.50486004
+      outSlope: -0.50486004
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.19019139
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0.20892334
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  sprintDuration: 0.7
+  sprintCoolDown: 1.5
+  sprintRotateCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.225
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.8
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  sprintMaxRotateAngle: 10
+  sprintRotateDuration: 0.2
+  timeScale: 1
 --- !u!114 &1360575517897679518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -505,6 +595,9 @@ MonoBehaviour:
   FpsWeaponLayer:
     serializedVersion: 2
     m_Bits: 1024
+  initDropSpeed: {x: 0, y: 8, z: 10}
+  gravity: -15
+  dropTime: 1
 --- !u!114 &783424908873546082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -868,7 +961,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 2871
+    m_Bits: 15159
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -946,6 +1039,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 806887368}
     m_Modifications:
+    - target: {fileID: 6530784527232116, guid: 7468cd18030a0204ab08baf7ac36ff1e, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6226484437272429138, guid: 7468cd18030a0204ab08baf7ac36ff1e,
         type: 3}
       propertyPath: m_RootOrder
@@ -1027,6 +1124,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 806887368}
     m_Modifications:
+    - target: {fileID: 6530784527232116, guid: 7468cd18030a0204ab08baf7ac36ff1e, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6226484437272429138, guid: 7468cd18030a0204ab08baf7ac36ff1e,
         type: 3}
       propertyPath: m_RootOrder

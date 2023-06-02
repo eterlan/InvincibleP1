@@ -1,5 +1,7 @@
 ﻿using System;
-using Unity.FPS.Game;
+using FPS.Scripts.Game;
+using FPS.Scripts.Game.Managers;
+using FPS.Scripts.Game.Shared;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
@@ -42,6 +44,8 @@ namespace Unity.FPS.Gameplay
 
         [Tooltip("Multiplicator for the sprint speed (based on grounded speed)")]
         public float SprintSpeedModifier = 2f;
+
+        public float externalSpeedModifier = 1;
 
         [Tooltip("Height at which the player dies instantly when falling off the map")]
         public float KillHeight = -50f;
@@ -157,7 +161,7 @@ namespace Unity.FPS.Gameplay
 
         const float k_JumpGroundingPreventionTime = 0.2f;
         const float k_GroundCheckDistanceInAir = 0.07f;
-
+        
         void Awake()
         {
             ActorsManager actorsManager = FindObjectOfType<ActorsManager>();
@@ -379,6 +383,7 @@ namespace Unity.FPS.Gameplay
 
                 var sprintSpeedRatio = sprintCurve.Evaluate(m_sprintElapsedTime / sprintDuration);
                 var speedModifier    = m_isSprinting ? SprintSpeedModifier * sprintSpeedRatio : 1f;
+                speedModifier *= externalSpeedModifier;
                 // calculate the desired velocity from inputs, max speed, and current slope
                 Vector3 targetVelocity = worldspaceMoveInput * MaxSpeedOnGround * speedModifier;
                 // reduce speed if crouching by crouch speed ratio
@@ -556,6 +561,13 @@ namespace Unity.FPS.Gameplay
 
             IsCrouching = crouched;
             return true;
+        }
+
+        public void Teleport(Vector3 targetPos)
+        {
+            m_Controller.enabled = false;
+            transform.position = targetPos;
+            m_Controller.enabled = true;
         }
     }
 }

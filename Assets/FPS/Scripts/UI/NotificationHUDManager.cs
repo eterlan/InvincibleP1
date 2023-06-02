@@ -1,4 +1,6 @@
-﻿using Unity.FPS.Game;
+﻿using FPS.Scripts.Game;
+using FPS.Scripts.Game.Managers;
+using FPS.Scripts.Game.Shared;
 using Unity.FPS.Gameplay;
 using UnityEngine;
 

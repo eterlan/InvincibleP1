@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using FPS.Scripts.Game;
+using FPS.Scripts.Game.Managers;
 using Sirenix.OdinInspector;
-using Unity.FPS.Game;
 using UnityEngine;
 
 public class TestEvent : MonoBehaviour

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using Unity.FPS.Game;
+using FPS.Scripts.Game;
+using FPS.Scripts.Game.Shared;
 
 namespace Unity.FPS.Gameplay
 {

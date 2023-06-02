@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6471968429945751368}
   - component: {fileID: 3471509760121373335}
   - component: {fileID: 7583640433812654122}
+  - component: {fileID: 7031107451563079424}
   m_Layer: 10
   m_Name: Weapon_Launcher
   m_TagString: Untagged
@@ -71,6 +72,7 @@ MonoBehaviour:
   RecoilForce: 1
   AimZoomRatio: 0.8
   AimOffset: {x: 0, y: 0, z: 0}
+  CannotReload: 1
   AutomaticReload: 1
   HasPhysicalBullets: 0
   ClipSize: 30
@@ -322,6 +324,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7031107451563079424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2225486910712267859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec75cc147c034c90a7889b1ebf080af3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 0
+  range: 15
 --- !u!1 &2990922162098100101
 GameObject:
   m_ObjectHideFlags: 0
