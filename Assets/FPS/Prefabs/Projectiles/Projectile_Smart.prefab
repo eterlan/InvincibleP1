@@ -209,7 +209,7 @@ MonoBehaviour:
   isAutoTrack: 1
   target: {fileID: 0}
   maxSpeed: 20
-  maxAngleSpeed: 300
+  maxAngleSpeed: 150
   toMaxSpeedTime: 2
   toMaxAngleSpeedTime: 2
   toMaxSpeedCurve:
@@ -243,28 +243,37 @@ MonoBehaviour:
       time: 0
       value: 0
       inSlope: 0.005028883
-      outSlope: 0.08845295
+      outSlope: 0.08980352
       tangentMode: 65
       weightedMode: 2
       inWeight: 0
       outWeight: 0.39996076
     - serializedVersion: 3
-      time: 0.29423508
+      time: 0.28981003
       value: 0.02602596
-      inSlope: 0.23851442
-      outSlope: 0.23851442
+      inSlope: 0.13923192
+      outSlope: 0.13923192
       tangentMode: 0
       weightedMode: 3
       inWeight: 0.23500456
-      outWeight: 0.3409895
+      outWeight: 0.5113201
+    - serializedVersion: 3
+      time: 0.89290774
+      value: 0.5507302
+      inSlope: 2.0016737
+      outSlope: 2.0016737
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.28117177
+      outWeight: 0.4273322
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 1.3800262
-      outSlope: 1.3800262
-      tangentMode: 34
+      inSlope: 11.371895
+      outSlope: 11.371895
+      tangentMode: 0
       weightedMode: 1
-      inWeight: 0.33333334
+      inWeight: 0.07863084
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2

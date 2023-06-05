@@ -11,8 +11,10 @@ namespace FPS.Scripts.Game.Shared
         public float CriticalHealthRatio = 0.3f;
 
         public UnityAction<float, GameObject> OnDamaged;
-        public UnityAction<float> OnHealed;
-        public UnityAction OnDie;
+        public UnityAction<float>             OnHealed;
+        public UnityAction                    OnDie;
+        public UnityAction                    OnRevive;
+        public UnityAction                    OnHide;
 
         public float CurrentHealth { get; set; }
         public bool Invincible { get; set; }
@@ -61,6 +63,11 @@ namespace FPS.Scripts.Game.Shared
             HandleDeath();
         }
 
+        public void Hide()
+        {
+            OnHide?.Invoke();
+        }
+        
         public void Kill()
         {
             CurrentHealth = 0f;
@@ -71,6 +78,13 @@ namespace FPS.Scripts.Game.Shared
             HandleDeath();
         }
 
+        public void Revive()
+        {
+            m_IsDead = false;
+            Heal(Mathf.Infinity);
+            OnRevive?.Invoke();
+        }
+        
         void HandleDeath()
         {
             if (m_IsDead)

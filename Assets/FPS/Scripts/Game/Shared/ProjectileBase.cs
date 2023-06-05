@@ -23,5 +23,14 @@ namespace FPS.Scripts.Game.Shared
 
             OnShoot?.Invoke();
         }
+
+        public void Shoot(GameObject owner)
+        {
+            Owner = owner;
+            InitialPosition = owner.transform.position;
+            InitialDirection = owner.transform.forward;
+            
+            OnShoot?.Invoke();
+        }
     }
 }

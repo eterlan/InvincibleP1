@@ -18,13 +18,19 @@ namespace Unity.FPS.UI
         [Tooltip("Whether the health bar is visible when at full health or not")]
         public bool HideFullHealthBar = true;
 
-        private void Start()
+        private void Awake()
         {
+            Health.OnHide += OnDie;
             Health.OnDie += OnDie;
-            Health.OnHealed += OnHealed;
         }
 
-        private void OnHealed(float arg0)
+        private void OnDestroy()
+        {
+            Health.OnHide -= OnDie;
+            Health.OnDie += OnDie;
+        }
+
+        private void OnRevive()
         {
             ToggleVisibility(true);
         }

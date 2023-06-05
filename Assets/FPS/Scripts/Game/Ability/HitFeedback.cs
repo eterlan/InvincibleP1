@@ -1,10 +1,11 @@
+using System;
 using FPS.Scripts.Game.Shared;
 using UnityEngine;
 
 namespace FPS.Scripts.Game
 {
     [RequireComponent(typeof(Health))]
-    public class Weakness : MonoBehaviour
+    public class HitFeedback : MonoBehaviour
     {
         [GradientUsage(true)]
         public Gradient  hitGradient;
@@ -21,6 +22,7 @@ namespace FPS.Scripts.Game
         private float                 m_lastTimeDamaged = Mathf.NegativeInfinity;
         private bool                  m_wasDamagedThisFrame;
         private int                   m_emissionColorID;
+        private Collider              m_collider;
 
         private void Update()
         {
@@ -40,14 +42,30 @@ namespace FPS.Scripts.Game
             m_health = GetComponent<Health>();
             m_renderer = GetComponentInChildren<Renderer>();
             m_weaknessPropertyBlock = new MaterialPropertyBlock();
+            m_health.OnHide += OnHide;
             m_health.OnDamaged += OnDamaged;
             m_health.OnDie += OnDie;
-            m_health.OnHealed += OnHealed;
+            m_health.OnRevive += OnRevive;
+            m_collider = GetComponent<Collider>();
         }
 
-        private void OnHealed(float _)
+        private void OnHide()
         {
-            model.SetActive(true);
+            m_collider.enabled = false;
+        }
+
+        private void OnDestroy()
+        {
+            m_health.OnDamaged -= OnDamaged;
+            m_health.OnDie -= OnDie;
+            m_health.OnRevive -= OnRevive;
+            m_health.OnHide -= OnHide;
+        }
+
+        private void OnRevive()
+        {
+            m_collider.enabled = true;
+            m_renderer.enabled = true;
         }
 
         private void OnDie()
@@ -55,7 +73,8 @@ namespace FPS.Scripts.Game
             // spawn a particle system when dying
             var vfx = Instantiate(deathVFX, transform.position + deathVFXSpawnOffset, Quaternion.identity);
             Destroy(vfx, 5f);
-            model.SetActive(false);
+            OnHide();
+            m_renderer.enabled = false;
         }
 
         private void OnDamaged(float dmg, GameObject damageSource)
