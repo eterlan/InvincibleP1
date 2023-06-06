@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using FPS.Scripts.Game;
 using FPS.Scripts.Game.Shared;
@@ -19,6 +20,8 @@ namespace Unity.FPS.Gameplay
             PutUpNew,
         }
 
+        public int maxWeaponCount = 5;
+        
         [Tooltip("List of weapon the player will start with")]
         public List<WeaponController> StartingWeapons = new List<WeaponController>();
 
@@ -90,18 +93,23 @@ namespace Unity.FPS.Gameplay
         public UnityAction<WeaponController, int> OnAddedWeapon;
         public UnityAction<WeaponController, int> OnRemovedWeapon;
 
-        WeaponController[] m_WeaponSlots = new WeaponController[9]; // 9 available weapon slots
-        PlayerInputHandler m_InputHandler;
-        PlayerCharacterController m_PlayerCharacterController;
-        float m_WeaponBobFactor;
-        Vector3 m_LastCharacterPosition;
-        Vector3 m_WeaponMainLocalPosition;
-        Vector3 m_WeaponBobLocalPosition;
-        Vector3 m_WeaponRecoilLocalPosition;
-        Vector3 m_AccumulatedRecoil;
-        float m_TimeStartedWeaponSwitch;
-        WeaponSwitchState m_WeaponSwitchState;
-        int m_WeaponSwitchNewWeaponIndex;
+        private WeaponController[] m_WeaponSlots; // 9 available weapon slots
+        PlayerInputHandler         m_InputHandler;
+        PlayerCharacterController  m_PlayerCharacterController;
+        float                      m_WeaponBobFactor;
+        Vector3                    m_LastCharacterPosition;
+        Vector3                    m_WeaponMainLocalPosition;
+        Vector3                    m_WeaponBobLocalPosition;
+        Vector3                    m_WeaponRecoilLocalPosition;
+        Vector3                    m_AccumulatedRecoil;
+        float                      m_TimeStartedWeaponSwitch;
+        WeaponSwitchState          m_WeaponSwitchState;
+        int                        m_WeaponSwitchNewWeaponIndex;
+
+        private void Awake()
+        {
+            m_WeaponSlots = new WeaponController[maxWeaponCount];
+        }
 
         void Start()
         {
@@ -310,7 +318,7 @@ namespace Unity.FPS.Gameplay
             for (var index = 0; index < m_WeaponSlots.Length; index++)
             {
                 var w = m_WeaponSlots[index];
-                if (w != null && w.SourcePrefab == weaponPrefab.gameObject)
+                if (w != null && w.SourcePrefab.name == weaponPrefab.name)
                 {
                     return w;
                 }
@@ -467,10 +475,10 @@ namespace Unity.FPS.Gameplay
         public bool AddWeapon(WeaponController weaponPrefab)
         {
             // if we already hold this weapon type (a weapon coming from the same source prefab), don't add the weapon
-            if (HasWeapon(weaponPrefab) != null)
-            {
-                return false;
-            }
+            // if (HasWeapon(weaponPrefab) != null)
+            // {
+            //     return false;
+            // }
 
             // search our weapon slots for the first free one, assign the weapon to it, and return true if we found one. Return false otherwise
             for (int i = 0; i < m_WeaponSlots.Length; i++)

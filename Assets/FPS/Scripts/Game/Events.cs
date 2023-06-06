@@ -19,6 +19,8 @@ namespace FPS.Scripts.Game
         public static DamageEvent                 DamageEvent                 = new DamageEvent();
         public static DisplayMessageEvent         DisplayMessageEvent         = new DisplayMessageEvent();
         public static ChangeTimeScaleEvent        ChangeTimeScaleEvent        = new ChangeTimeScaleEvent();
+
+        public static PlayerGhostEvent PlayerGhostEvent = new PlayerGhostEvent();
     }
 
     public class ObjectiveUpdateEvent : GameEvent
@@ -70,5 +72,10 @@ namespace FPS.Scripts.Game
     public class ChangeTimeScaleEvent : GameEvent
     {
         public float timeScale;
+    }
+
+    public class PlayerGhostEvent : GameEvent
+    {
+        public bool enable;
     }
 }

@@ -12,6 +12,17 @@ namespace FPS.Scripts.Game
         {
             return Mathf.Lerp(Min, Max, ratio);
         }
+
+        public float GetRandomValue()
+        {
+            return Random.Range(Min, Max);
+        }
+
+        public MinMaxFloat(float min, float max)
+        {
+            Min = min;
+            Max = max;
+        }
     }
 
     [System.Serializable]

@@ -1,5 +1,6 @@
 using System;
 using FPS.Scripts.Game.Shared;
+using Unity.FPS.Gameplay;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -8,16 +9,22 @@ namespace FPS.Scripts.Game.Managers
 {
     public class PickupSpawner : MonoBehaviour
     {
-        public float radius = 15;
-        [FormerlySerializedAs("weapons")]
-        public GameObject[] weaponPrefabs;
-        public int         tryTime = 100;
-        public float       spawnHeight = 0.6f;
-        public MinMaxFloat spawnIntervalRandomRange;
+        [Header("Limit")]
+        public int maxSpawnAmountInLevel = 7;
+
+
+        public float        radius = 15;
+        [FormerlySerializedAs("weaponPrefabs")]
+        public GameObject[] prefabs;
+        public int          tryTime     = 100;
+        public float        spawnHeight = 0.6f;
+        public MinMaxFloat  spawnIntervalRandomRange;
 
 
         public Color debugColor = Color.red;
 
+
+        private int             m_spawnAmountInLevel;
         private Collider[]      m_overlapped = new Collider[1];
         private GameFlowManager m_gameFlowManager;
         private float           m_lastSpawnTime = Mathf.NegativeInfinity;
@@ -26,6 +33,15 @@ namespace FPS.Scripts.Game.Managers
         private void Start()
         {
             m_gameFlowManager = FindObjectOfType<GameFlowManager>();
+            EventManager.AddListener<PickupEvent>(OnPickup);
+        }
+
+        private void OnPickup(PickupEvent go)
+        {
+            if (go.Pickup.TryGetComponent<WeaponPickup>(out _))
+            {
+                m_spawnAmountInLevel--;
+            }
         }
 
         private void OnDrawGizmos()
@@ -53,6 +69,9 @@ namespace FPS.Scripts.Game.Managers
 
         public void Spawn()
         {
+            if (m_spawnAmountInLevel > maxSpawnAmountInLevel)
+                return;
+            
             var pivot      = transform.position;
             var extent     = new Vector3(0.5f, 0.1f, 0.5f);
 
@@ -77,7 +96,8 @@ namespace FPS.Scripts.Game.Managers
                 return;
             }
 
-            var weaponPrefab = weaponPrefabs[Random.Range(0, weaponPrefabs.Length)].gameObject;
+            m_spawnAmountInLevel++;
+            var weaponPrefab = prefabs[Random.Range(0, prefabs.Length)].gameObject;
             Instantiate(weaponPrefab, spawnPoint, Quaternion.identity, transform);
         }
     }

@@ -629,7 +629,7 @@ MonoBehaviour:
   DetectionSourcePoint: {fileID: 6571005840976436832}
   DetectionRange: 30
   AttackRange: 35
-  KnownTargetTimeout: 4
+  KnownTargetTimeout: 5
   Animator: {fileID: 0}
 --- !u!1 &6364231889519975101
 GameObject:

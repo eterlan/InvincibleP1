@@ -1,5 +1,8 @@
-﻿using FPS.Scripts.Game;
+﻿using FPS.Scripts.AI;
+using FPS.Scripts.Game;
 using FPS.Scripts.Game.Shared;
+using Sirenix.OdinInspector.Editor.Drawers;
+using Unity.FPS.Gameplay;
 using UnityEngine;
 
 namespace Unity.FPS.AI
@@ -12,7 +15,7 @@ namespace Unity.FPS.AI
             Idle,
             Attack,
         }
-
+        
         public Transform TurretPivot;
         public Transform TurretAimPoint;
         public Animator Animator;
@@ -26,6 +29,13 @@ namespace Unity.FPS.AI
 
         public ParticleSystem[] OnDetectVfx;
         public AudioClip OnDetectSfx;
+
+
+
+        [Header("Skill")]
+        public EnemySkillBase timeControl;
+        public EnemySkillBase missile;
+
 
         public AIState AiState { get; private set; }
 
@@ -42,6 +52,9 @@ namespace Unity.FPS.AI
 
         void Start()
         {
+            timeControl = GetComponentInChildren<Skill_TimeControl>();
+            missile = GetComponentInChildren<Skill_SmartMissile>();
+            
             m_Health = GetComponent<Health>();
             DebugUtility.HandleErrorIfNullGetComponent<Health, EnemyTurret>(m_Health, this, gameObject);
             m_Health.OnDamaged += OnDamaged;
@@ -67,6 +80,13 @@ namespace Unity.FPS.AI
         void Update()
         {
             UpdateCurrentAiState();
+            UpdateSkill();
+        }
+
+        private void UpdateSkill()
+        {
+            timeControl.TryUse(m_EnemyController);
+            missile.TryUse(m_EnemyController);
         }
 
         void LateUpdate()
@@ -80,17 +100,17 @@ namespace Unity.FPS.AI
             switch (AiState)
             {
                 case AIState.Attack:
-                    bool mustShoot = Time.time > m_TimeStartedDetection + DetectionFireDelay;
+                    bool shooting = Time.time > m_TimeStartedDetection + DetectionFireDelay && !missile.canUseAbility;
                     // Calculate the desired rotation of our turret (aim at target)
                     Vector3 directionToTarget =
                         (m_EnemyController.KnownDetectedTarget.transform.position - TurretAimPoint.position).normalized;
                     Quaternion offsettedTargetRotation =
                         Quaternion.LookRotation(directionToTarget) * m_RotationWeaponForwardToPivot;
                     m_PivotAimingRotation = Quaternion.Slerp(m_PreviousPivotAimingRotation, offsettedTargetRotation,
-                        (mustShoot ? AimRotationSharpness : LookAtRotationSharpness) * Time.deltaTime);
+                        (shooting ? AimRotationSharpness : LookAtRotationSharpness) );
 
                     // shoot
-                    if (mustShoot)
+                    if (shooting)
                     {
                         Vector3 correctedDirectionToTarget =
                             (m_PivotAimingRotation * Quaternion.Inverse(m_RotationWeaponForwardToPivot)) *
@@ -108,7 +128,7 @@ namespace Unity.FPS.AI
             switch (AiState)
             {
                 case AIState.Attack:
-                    TurretPivot.rotation = m_PivotAimingRotation;
+                    TurretPivot.rotation = m_PivotAimingRotation; 
                     break;
                 default:
                     // Use the turret rotation of the animation

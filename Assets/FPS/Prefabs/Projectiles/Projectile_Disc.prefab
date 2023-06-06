@@ -194,8 +194,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage:
-    Min: 80
-    Max: 350
+    Min: 40
+    Max: 150
   Radius:
     Min: 0.2
     Max: 0.2

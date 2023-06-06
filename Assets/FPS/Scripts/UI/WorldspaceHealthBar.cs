@@ -20,14 +20,16 @@ namespace Unity.FPS.UI
 
         private void Awake()
         {
+            Health.OnRevive += OnRevive;
             Health.OnHide += OnDie;
             Health.OnDie += OnDie;
         }
 
         private void OnDestroy()
         {
+            Health.OnRevive -= OnRevive;
             Health.OnHide -= OnDie;
-            Health.OnDie += OnDie;
+            Health.OnDie -= OnDie;
         }
 
         private void OnRevive()

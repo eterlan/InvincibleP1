@@ -63,6 +63,14 @@ namespace Unity.FPS.UI
 
             m_PlayerHealth.OnDamaged += OnTakeDamage;
             m_PlayerHealth.OnHealed += OnHealed;
+            
+            EventManager.AddListener<PlayerGhostEvent>(OnPlayerGhost);
+        }
+
+        private void OnPlayerGhost(PlayerGhostEvent args)
+        {
+            
+            
         }
 
         void Update()

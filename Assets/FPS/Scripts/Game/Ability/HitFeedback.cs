@@ -28,9 +28,13 @@ namespace FPS.Scripts.Game
         {
             var sinceLastTimeDamaged = Time.time - m_lastTimeDamaged;
 
-            var color = hitGradient.Evaluate(sinceLastTimeDamaged / hitFlashDuration);
-            m_weaknessPropertyBlock.SetColor(m_emissionColorID, color);
-            m_renderer.SetPropertyBlock(m_weaknessPropertyBlock);
+            if (sinceLastTimeDamaged < hitFlashDuration)
+            {
+                var color = hitGradient.Evaluate(sinceLastTimeDamaged / hitFlashDuration);
+                m_weaknessPropertyBlock.SetColor(m_emissionColorID, color);
+                m_renderer.SetPropertyBlock(m_weaknessPropertyBlock);    
+            }
+            
         
             
             m_wasDamagedThisFrame = false;

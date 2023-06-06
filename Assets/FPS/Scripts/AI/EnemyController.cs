@@ -6,6 +6,7 @@ using FPS.Scripts.Game.Shared;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace Unity.FPS.AI
@@ -111,7 +112,9 @@ namespace Unity.FPS.AI
         int m_PathDestinationNodeIndex;
         EnemyManager m_EnemyManager;
         ActorsManager m_ActorsManager;
-        Health m_Health;
+        [FormerlySerializedAs("Health")]
+        [FormerlySerializedAs("m_Health")]
+        public Health health;
         Actor m_Actor;
         Collider[] m_SelfColliders;
         GameFlowManager m_GameFlowManager;
@@ -132,8 +135,8 @@ namespace Unity.FPS.AI
 
             m_EnemyManager.RegisterEnemy(this);
 
-            m_Health = GetComponent<Health>();
-            DebugUtility.HandleErrorIfNullGetComponent<Health, EnemyController>(m_Health, this, gameObject);
+            health = GetComponent<Health>();
+            DebugUtility.HandleErrorIfNullGetComponent<Health, EnemyController>(health, this, gameObject);
 
             m_Actor = GetComponent<Actor>();
             DebugUtility.HandleErrorIfNullGetComponent<Actor, EnemyController>(m_Actor, this, gameObject);
@@ -145,8 +148,8 @@ namespace Unity.FPS.AI
             DebugUtility.HandleErrorIfNullFindObject<GameFlowManager, EnemyController>(m_GameFlowManager, this);
 
             // Subscribe to damage & death actions
-            m_Health.OnDie += OnDie;
-            m_Health.OnDamaged += OnDamaged;
+            health.OnDie += OnDie;
+            health.OnDamaged += OnDamaged;
 
             // Find and initialize all weapons
             FindAndInitializeAllWeapons();

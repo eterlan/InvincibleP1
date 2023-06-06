@@ -190,7 +190,7 @@ MonoBehaviour:
   Radius: 0.1
   Root: {fileID: 3659995153115176982}
   Tip: {fileID: 1135791333161367127}
-  MaxLifeTime: 5
+  MaxLifeTime: 3
   ImpactVfx: {fileID: 7655095426451682942, guid: 4d48b487f11e62940a978c7c0c0cbcb4,
     type: 3}
   ImpactVfxLifetime: 5
@@ -202,14 +202,14 @@ MonoBehaviour:
   Speed: 100
   GravityDownAcceleration: 0
   TrajectoryCorrectionDistance: 5
-  Damage: 10
+  Damage: 5
   AreaOfDamage: {fileID: -5734646522830962984}
   RadiusColor: {r: 0, g: 1, b: 1, a: 1}
   hasInitDir: 1
   isAutoTrack: 1
   target: {fileID: 0}
   maxSpeed: 20
-  maxAngleSpeed: 150
+  maxAngleSpeed: 120
   toMaxSpeedTime: 2
   toMaxAngleSpeedTime: 2
   toMaxSpeedCurve:
@@ -242,38 +242,29 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0.005028883
-      outSlope: 0.08980352
-      tangentMode: 65
+      inSlope: 0.2665007
+      outSlope: 0.2665007
+      tangentMode: 0
       weightedMode: 2
-      inWeight: 0
-      outWeight: 0.39996076
+      inWeight: 0.33333334
+      outWeight: 0.80687296
     - serializedVersion: 3
-      time: 0.28981003
-      value: 0.02602596
-      inSlope: 0.13923192
-      outSlope: 0.13923192
+      time: 0.5148797
+      value: 0.99879694
+      inSlope: -0.016585533
+      outSlope: -0.016585533
       tangentMode: 0
       weightedMode: 3
-      inWeight: 0.23500456
-      outWeight: 0.5113201
+      inWeight: 0.5139034
+      outWeight: 0.4890698
     - serializedVersion: 3
-      time: 0.89290774
-      value: 0.5507302
-      inSlope: 2.0016737
-      outSlope: 2.0016737
-      tangentMode: 0
-      weightedMode: 3
-      inWeight: 0.28117177
-      outWeight: 0.4273322
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 11.371895
-      outSlope: 11.371895
+      time: 1.0956726
+      value: 0.27793884
+      inSlope: -2.2484667
+      outSlope: -2.2484667
       tangentMode: 0
       weightedMode: 1
-      inWeight: 0.07863084
+      inWeight: 0.22009304
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -296,7 +287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0244d6b9e98532469c7be0732490a61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AreaOfEffectDistance: 2
+  AreaOfEffectDistance: 2.5
   DamageRatioOverDistance:
     serializedVersion: 2
     m_Curve:
@@ -311,12 +302,12 @@ MonoBehaviour:
       outWeight: 0.5208333
     - serializedVersion: 3
       time: 1
-      value: 0
-      inSlope: -2.8867912
-      outSlope: -2.8867912
+      value: 0.3
+      inSlope: -1.5915649
+      outSlope: -1.5915649
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.041666687
+      inWeight: 0.070833325
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2

@@ -1,7 +1,10 @@
+using System;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using FPS.Scripts.Game.Shared;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace FPS.Scripts.AI
 {
@@ -19,6 +22,14 @@ namespace FPS.Scripts.AI
         public float initHeight;
         public float completeHeight;
 
+        protected override void Start()
+        {
+            base.Start();
+            var startPos = transform.localPosition;
+            startPos.y = initHeight;
+            transform.localPosition = startPos;
+        }
+
         protected override void OnUsing()
         {
             if (Time.time - lastShootTime < shootInterval)
@@ -35,22 +46,29 @@ namespace FPS.Scripts.AI
             }
         }
 
-        protected override async UniTask ShowWeaknessPerform()
+        protected override async UniTask ShowWeaknessPerform(CancellationToken token)
         {
-            await base.ShowWeaknessPerform();
+            await base.ShowWeaknessPerform(token);
             var startPos = transform.localPosition;
             startPos.y = initHeight;
             transform.localPosition = startPos;
-            await transform.DOLocalMoveY(completeHeight, showDuration);
+            await transform.DOLocalMoveY(completeHeight, showDuration).WithCancellation(token);
         }
 
-        protected override async UniTask HideWeaknessPerform()
+        protected override async UniTask HideWeaknessPerform(CancellationToken token)
         {
-            await base.HideWeaknessPerform();
+            await base.HideWeaknessPerform(token);
             var startPos = transform.localPosition;
             startPos.y = completeHeight;
             transform.localPosition = startPos;
-            await transform.DOLocalMoveY(initHeight, showDuration);
+            transform.DOKill();
+            transform.DOLocalMoveY(initHeight, showDuration);
+            UniTask.Delay(TimeSpan.FromSeconds(showDuration));
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
         }
 
         protected override void OnUse()
