@@ -190,7 +190,7 @@ MonoBehaviour:
   Radius: 0.1
   Root: {fileID: 3659995153115176982}
   Tip: {fileID: 1135791333161367127}
-  MaxLifeTime: 3
+  MaxLifeTime: 2
   ImpactVfx: {fileID: 7655095426451682942, guid: 4d48b487f11e62940a978c7c0c0cbcb4,
     type: 3}
   ImpactVfxLifetime: 5
@@ -208,10 +208,10 @@ MonoBehaviour:
   hasInitDir: 1
   isAutoTrack: 1
   target: {fileID: 0}
-  maxSpeed: 20
-  maxAngleSpeed: 120
+  maxSpeed: 30
+  maxAngleSpeed: 150
   toMaxSpeedTime: 2
-  toMaxAngleSpeedTime: 2
+  toMaxAngleSpeedTime: 1.3
   toMaxSpeedCurve:
     serializedVersion: 2
     m_Curve:
@@ -249,8 +249,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.80687296
     - serializedVersion: 3
-      time: 0.5148797
-      value: 0.99879694
+      time: 0.43271112
+      value: 1.0011544
       inSlope: -0.016585533
       outSlope: -0.016585533
       tangentMode: 0

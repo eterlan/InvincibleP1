@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using Unity.FPS.Gameplay;
 using UnityEngine;
@@ -13,7 +14,7 @@ namespace FPS.Scripts.Gameplay
         protected PlayerCharacterController PlayerCharacterController;
         protected float                     ElapsedTime;
 
-        public async UniTask Apply(PlayerWeaponsManager playerWeaponsManager)
+        public async UniTask Use(PlayerWeaponsManager playerWeaponsManager)
         {
             PlayerWeaponsManager = playerWeaponsManager;
             PlayerCharacterController = playerWeaponsManager.GetComponent<PlayerCharacterController>();

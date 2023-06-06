@@ -14,6 +14,8 @@ namespace FPS.Scripts.AI
         public int            minAmount = 4;
         public int            maxAmount = 10;
         public Transform      muzzlePos;
+        public AudioClip      shootSfx;
+
 
         public  float   shootInterval = 2f;
         private float lastShootTime;
@@ -38,6 +40,7 @@ namespace FPS.Scripts.AI
             lastShootTime = Time.time;
             lastShootTime = Time.time;
             var amount = Random.Range(minAmount, maxAmount);
+            audioSource.PlayOneShot(shootSfx);
             for (var i = 0; i < amount; i++)
             {
                 var instance   = Instantiate(ProjectileBase, muzzlePos.position, Quaternion.identity);

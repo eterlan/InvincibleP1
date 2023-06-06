@@ -22,7 +22,8 @@ namespace FPS.Scripts.AI
         public MinMaxFloat skillIntervalRange = new(10, 15);
         [Range(1, 2)]
         public float       bonusIntervalMultiplier = 1.2f;
-        public float useSkillDelay = 2f;
+        public float     useSkillDelay = 2f;
+        public AudioClip playSkillSfx;
         
         protected float skillDuration         = 10;
         protected float lastEndUseSkillTime   = Mathf.NegativeInfinity;
@@ -46,11 +47,13 @@ namespace FPS.Scripts.AI
         private   float                   m_skillInterval;
         private   Health                  m_health;
         protected CancellationToken       OnDestroyToken;
+        protected AudioSource             audioSource;
 
         protected virtual void Awake()
         {
             OnDestroyToken = this.GetCancellationTokenOnDestroy();
             Owner = GetComponentInParent<EnemyController>();
+            audioSource = GetComponent<AudioSource>();
             m_health = GetComponent<Health>();
             m_health.OnDie += OnDie;
         }
@@ -99,7 +102,7 @@ namespace FPS.Scripts.AI
         [Button]
         public async UniTaskVoid ShowWeakness(CancellationToken token)
         {
-
+            audioSource.PlayOneShot(playSkillSfx);
             m_health.Revive();
             canUseAbility = true;
             if (invincibleOnShow)

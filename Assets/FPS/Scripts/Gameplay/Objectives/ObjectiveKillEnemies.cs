@@ -26,8 +26,8 @@ namespace Unity.FPS.Gameplay
 
             // set a title and description specific for this type of objective, if it hasn't one
             if (string.IsNullOrEmpty(Title))
-                Title = "Eliminate " + (MustKillAllEnemies ? "all the" : KillsToCompleteObjective.ToString()) +
-                        " enemies";
+                Title = "干掉" + (MustKillAllEnemies ? "所有" : KillsToCompleteObjective.ToString()) +
+                        "敌人！";
 
             if (string.IsNullOrEmpty(Description))
                 Description = GetUpdatedCounterAmount();

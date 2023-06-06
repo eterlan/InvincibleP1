@@ -178,7 +178,7 @@ MonoBehaviour:
   ShellPoolSize: 1
   AmmoReloadRate: 1.1
   AmmoReloadDelay: 1
-  MaxAmmo: 2
+  MaxAmmo: 5
   AutomaticReleaseOnCharged: 0
   MaxChargeDuration: 1
   AmmoUsedOnStartCharge: 0
@@ -323,7 +323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 2
-  speedMultiplier: 2
+  speedMultiplier: 1.6
 --- !u!1 &2867801751256125023
 GameObject:
   m_ObjectHideFlags: 0

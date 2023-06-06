@@ -143,7 +143,7 @@ namespace Unity.FPS.Gameplay
 
             if (activeWeapon.TryGetComponent<AbilityBase>(out var ability))
             {
-                ability.Apply(this).Forget();
+                ability.Use(this).Forget();
             }
             
             RemoveWeapon(activeWeapon);

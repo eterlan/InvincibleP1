@@ -1,8 +1,6 @@
 ﻿using FPS.Scripts.AI;
 using FPS.Scripts.Game;
 using FPS.Scripts.Game.Shared;
-using Sirenix.OdinInspector.Editor.Drawers;
-using Unity.FPS.Gameplay;
 using UnityEngine;
 
 namespace Unity.FPS.AI
