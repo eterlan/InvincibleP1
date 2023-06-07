@@ -1,9 +1,18 @@
 ﻿using FPS.Scripts.Game;
 using FPS.Scripts.Game.Managers;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Unity.FPS.Gameplay
 {
+    public enum GeneratedType
+    {
+        None,
+        Placement,
+        Spawn,
+        Loot
+    }
+    
     [RequireComponent(typeof(Rigidbody), typeof(Collider))]
     public class Pickup : MonoBehaviour
     {
@@ -18,6 +27,10 @@ namespace Unity.FPS.Gameplay
         [Tooltip("Sound played on pickup")] public AudioClip PickupSfx;
         [Tooltip("VFX spawned on pickup")] public GameObject PickupVfxPrefab;
 
+        [FormerlySerializedAs("generatedType")]
+        [Header("生成方式")]
+        public GeneratedType generationType;
+        
         public Rigidbody PickupRigidbody { get; private set; }
 
         Collider m_Collider;

@@ -55,13 +55,14 @@ namespace FPS.Scripts.Game.Managers
 
             m_lastSpawnTime = Time.time;
             m_spawnInterval = Random.Range(spawnIntervalRandomRange.Min, spawnIntervalRandomRange.Max);
-            Spawn();
+            TrySpawn(out _);
         }
 
-        public virtual void Spawn()
+        public virtual bool TrySpawn(out GameObject spawnInstance)
         {
+            spawnInstance = null;
             if (m_spawnAmountInLevel >= maxSpawnAmountInLevel)
-                return;
+                return false;
             
             var pivot      = transform.position;
             var extent     = new Vector3(0.5f, 0.1f, 0.5f);
@@ -84,12 +85,13 @@ namespace FPS.Scripts.Game.Managers
             if (spawnPoint == Vector3.zero)
             {
                 //Debug.Log("Cannot find spawn point");
-                return;
+                return false;
             }
 
             m_spawnAmountInLevel++;
             var weaponPrefab = prefabs[Random.Range(0, prefabs.Length)].gameObject;
-            Instantiate(weaponPrefab, spawnPoint, Quaternion.identity, transform);
+            spawnInstance = Instantiate(weaponPrefab, spawnPoint, Quaternion.identity, transform);
+            return true;
         }
     }
 }

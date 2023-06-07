@@ -1,4 +1,6 @@
-﻿using FPS.Scripts.Game;
+﻿using System;
+using DG.Tweening;
+using FPS.Scripts.Game;
 using FPS.Scripts.Game.Managers;
 using FPS.Scripts.Game.Shared;
 using Unity.FPS.Gameplay;
@@ -17,6 +19,10 @@ namespace Unity.FPS.UI
 
         [Tooltip("CanvasGroup to fade the critical health vignette")]
         public CanvasGroup VignetteCanvasGroup;
+
+        [Header("Ghost")]
+        public CanvasGroup GhostCanvasGroup;
+        public float ghostTransitionTime = 0.5f;
 
         [Header("Damage")] [Tooltip("Color of the damage flash")]
         public Color DamageFlashColor;
@@ -69,8 +75,10 @@ namespace Unity.FPS.UI
 
         private void OnPlayerGhost(PlayerGhostEvent args)
         {
-            
-            
+            var isGhost  = args.enable;
+            var endValue = isGhost ? 1 : 0;
+            GhostCanvasGroup.DOKill();
+            GhostCanvasGroup.DOFade(endValue, ghostTransitionTime);
         }
 
         void Update()
