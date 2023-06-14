@@ -78,9 +78,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   VerticalBobFrequency: 1
   BobbingAmount: 0.3
-  RotatingSpeed: 360
+  RotatingSpeed: 120
   PickupSfx: {fileID: 8300000, guid: 7b83d61917ac1224f942a0609b1221f2, type: 3}
   PickupVfxPrefab: {fileID: 0}
+  generationType: 0
   WeaponPrefab: {fileID: 8323776800172828795, guid: 31d97e822763d1f4cb769f7e3f7f7333,
     type: 3}
 --- !u!1 &7810732725597439403

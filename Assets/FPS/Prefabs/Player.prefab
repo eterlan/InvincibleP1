@@ -409,8 +409,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dac5ddb3ce9b8884ca9588dc620ffcab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LookSensitivity: 0.25
-  WebglLookSensitivityMultiplier: 0.25
+  LookSensitivity: 0.3
+  WebglLookSensitivityMultiplier: 0.3
   TriggerAxisThreshold: 0.4
   InvertYAxis: 0
   InvertXAxis: 0
@@ -472,8 +472,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.1779162
-      value: 1.0550992
+      time: 0.18208185
+      value: 1.0151861
       inSlope: -0.008114
       outSlope: -0.008114
       tangentMode: 0
@@ -502,7 +502,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   sprintDuration: 0.7
-  sprintCoolDown: 1.5
+  sprintCoolDown: 1.3
   sprintRotateCurve:
     serializedVersion: 2
     m_Curve:
@@ -574,6 +574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6b4f98e62f1d104f8658bba08e5d56f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxWeaponCount: 5
   StartingWeapons:
   - {fileID: 8323776800172828795, guid: b318fabc73446b746a1005cede0c4ceb, type: 3}
   WeaponCamera: {fileID: 2286125971047457827}

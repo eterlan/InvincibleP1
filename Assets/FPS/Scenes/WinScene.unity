@@ -392,7 +392,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9d73053268a2ae48bb9e7d4bf6419fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneName: MyScene ver0.1
+  LoadSceneType: 2
+  SceneCollection: {fileID: 11400000, guid: 9ccfce762e8c106468dd67b40bfe4344, type: 2}
 --- !u!1 &134625305
 GameObject:
   m_ObjectHideFlags: 0
@@ -919,7 +920,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9d73053268a2ae48bb9e7d4bf6419fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneName: IntroMenu
+  LoadSceneType: 0
+  SceneCollection: {fileID: 0}
 --- !u!114 &986130591
 MonoBehaviour:
   m_ObjectHideFlags: 0

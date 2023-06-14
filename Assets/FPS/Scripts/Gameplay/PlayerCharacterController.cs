@@ -1,4 +1,6 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using FPS.Scripts.Game;
 using FPS.Scripts.Game.Managers;
 using FPS.Scripts.Game.Shared;
@@ -148,7 +150,8 @@ namespace Unity.FPS.Gameplay
 
         Health               m_Health;
         PlayerInputHandler   m_InputHandler;
-        CharacterController  m_Controller;
+        [FormerlySerializedAs("m_Controller")]
+        public CharacterController  Controller;
         PlayerWeaponsManager m_WeaponsManager;
         Actor                m_Actor;
         Vector3              m_GroundNormal;
@@ -183,8 +186,8 @@ namespace Unity.FPS.Gameplay
         void Start()
         {
             // fetch components on the same gameObject
-            m_Controller = GetComponent<CharacterController>();
-            DebugUtility.HandleErrorIfNullGetComponent<CharacterController, PlayerCharacterController>(m_Controller,
+            Controller = GetComponent<CharacterController>();
+            DebugUtility.HandleErrorIfNullGetComponent<CharacterController, PlayerCharacterController>(Controller,
                 this, gameObject);
 
             m_InputHandler = GetComponent<PlayerInputHandler>();
@@ -201,7 +204,7 @@ namespace Unity.FPS.Gameplay
             m_Actor = GetComponent<Actor>();
             DebugUtility.HandleErrorIfNullGetComponent<Actor, PlayerCharacterController>(m_Actor, this, gameObject);
 
-            m_Controller.enableOverlapRecovery = true;
+            Controller.enableOverlapRecovery = true;
 
             m_Health.OnDie += OnDie;
 
@@ -270,7 +273,7 @@ namespace Unity.FPS.Gameplay
         {
             // Make sure that the ground check distance while already in air is very small, to prevent suddenly snapping to ground
             float chosenGroundCheckDistance =
-                IsGrounded ? (m_Controller.skinWidth + GroundCheckDistance) : k_GroundCheckDistanceInAir;
+                IsGrounded ? (Controller.skinWidth + GroundCheckDistance) : k_GroundCheckDistanceInAir;
 
             // reset values before the ground check
             IsGrounded = false;
@@ -280,8 +283,8 @@ namespace Unity.FPS.Gameplay
             if (Time.time >= m_LastTimeJumped + k_JumpGroundingPreventionTime)
             {
                 // if we're grounded, collect info about the ground normal with a downward capsule cast representing our character capsule
-                if (Physics.CapsuleCast(GetCapsuleBottomHemisphere(), GetCapsuleTopHemisphere(m_Controller.height),
-                    m_Controller.radius, Vector3.down, out RaycastHit hit, chosenGroundCheckDistance, GroundCheckLayers,
+                if (Physics.CapsuleCast(GetCapsuleBottomHemisphere(), GetCapsuleTopHemisphere(Controller.height),
+                    Controller.radius, Vector3.down, out RaycastHit hit, chosenGroundCheckDistance, GroundCheckLayers,
                     QueryTriggerInteraction.Ignore))
                 {
                     // storing the upward direction for the surface found
@@ -295,9 +298,9 @@ namespace Unity.FPS.Gameplay
                         IsGrounded = true;
 
                         // handle snapping to the ground
-                        if (hit.distance > m_Controller.skinWidth)
+                        if (hit.distance > Controller.skinWidth)
                         {
-                            m_Controller.Move(Vector3.down * hit.distance);
+                            Controller.Move(Vector3.down * hit.distance);
                         }
                     }
                 }
@@ -444,7 +447,8 @@ namespace Unity.FPS.Gameplay
                 Vector3 horizontalVelocity = Vector3.ProjectOnPlane(CharacterVelocity, Vector3.up);
                 
                 // TODO 删除了speedModifier, 我感觉空中速度应该跟地面速度有关系.
-                horizontalVelocity = Vector3.ClampMagnitude(horizontalVelocity, MaxSpeedInAir);
+                var speedInAirLimit = MaxSpeedInAir * externalSpeedModifier;
+                horizontalVelocity = Vector3.ClampMagnitude(horizontalVelocity, speedInAirLimit);
                 CharacterVelocity = horizontalVelocity + (Vector3.up * verticalVelocity);
 
                 // apply the gravity to the velocity
@@ -454,17 +458,17 @@ namespace Unity.FPS.Gameplay
 
             // apply the final calculated velocity value as a character movement
             Vector3 capsuleBottomBeforeMove = GetCapsuleBottomHemisphere();
-            Vector3 capsuleTopBeforeMove    = GetCapsuleTopHemisphere(m_Controller.height);
+            Vector3 capsuleTopBeforeMove    = GetCapsuleTopHemisphere(Controller.height);
             var     finalVelocity           = CharacterVelocity;
 
             // TODO 尝试使用移动速度降低来处理这里, 感觉效果并不好.
             // var     y                       = finalVelocity.y;
             // finalVelocity *= 0.3f;
             // finalVelocity.y = y;
-            m_Controller.Move(finalVelocity * deltaTime);
+            Controller.Move(finalVelocity * deltaTime);
             // detect obstructions to adjust velocity accordingly
             m_LatestImpactSpeed = Vector3.zero;
-            if (Physics.CapsuleCast(capsuleBottomBeforeMove, capsuleTopBeforeMove, m_Controller.radius,
+            if (Physics.CapsuleCast(capsuleBottomBeforeMove, capsuleTopBeforeMove, Controller.radius,
                 CharacterVelocity.normalized, out RaycastHit hit, CharacterVelocity.magnitude * deltaTime, -1,
                 QueryTriggerInteraction.Ignore))
             {
@@ -478,19 +482,19 @@ namespace Unity.FPS.Gameplay
         // Returns true if the slope angle represented by the given normal is under the slope angle limit of the character controller
         bool IsNormalUnderSlopeLimit(Vector3 normal)
         {
-            return Vector3.Angle(transform.up, normal) <= m_Controller.slopeLimit;
+            return Vector3.Angle(transform.up, normal) <= Controller.slopeLimit;
         }
 
         // Gets the center point of the bottom hemisphere of the character controller capsule    
         Vector3 GetCapsuleBottomHemisphere()
         {
-            return transform.position + (transform.up * m_Controller.radius);
+            return transform.position + (transform.up * Controller.radius);
         }
 
         // Gets the center point of the top hemisphere of the character controller capsule    
         Vector3 GetCapsuleTopHemisphere(float atHeight)
         {
-            return transform.position + (transform.up * (atHeight - m_Controller.radius));
+            return transform.position + (transform.up * (atHeight - Controller.radius));
         }
 
         // Gets a reoriented direction that is tangent to a given slope
@@ -505,21 +509,21 @@ namespace Unity.FPS.Gameplay
             // Update height instantly
             if (force)
             {
-                m_Controller.height = m_TargetCharacterHeight;
-                m_Controller.center = Vector3.up * m_Controller.height * 0.5f;
+                Controller.height = m_TargetCharacterHeight;
+                Controller.center = Vector3.up * Controller.height * 0.5f;
                 PlayerCamera.transform.localPosition = Vector3.up * m_TargetCharacterHeight * CameraHeightRatio;
-                m_Actor.AimPoint.transform.localPosition = m_Controller.center;
+                m_Actor.AimPoint.transform.localPosition = Controller.center;
             }
             // Update smooth height
-            else if (m_Controller.height != m_TargetCharacterHeight)
+            else if (Controller.height != m_TargetCharacterHeight)
             {
                 // resize the capsule and adjust camera position
-                m_Controller.height = Mathf.Lerp(m_Controller.height, m_TargetCharacterHeight,
+                Controller.height = Mathf.Lerp(Controller.height, m_TargetCharacterHeight,
                     CrouchingSharpness * Time.deltaTime);
-                m_Controller.center = Vector3.up * m_Controller.height * 0.5f;
+                Controller.center = Vector3.up * Controller.height * 0.5f;
                 PlayerCamera.transform.localPosition = Vector3.Lerp(PlayerCamera.transform.localPosition,
                     Vector3.up * m_TargetCharacterHeight * CameraHeightRatio, CrouchingSharpness * Time.deltaTime);
-                m_Actor.AimPoint.transform.localPosition = m_Controller.center;
+                m_Actor.AimPoint.transform.localPosition = Controller.center;
             }
         }
 
@@ -539,12 +543,12 @@ namespace Unity.FPS.Gameplay
                     Collider[] standingOverlaps = Physics.OverlapCapsule(
                         GetCapsuleBottomHemisphere(),
                         GetCapsuleTopHemisphere(CapsuleHeightStanding),
-                        m_Controller.radius,
+                        Controller.radius,
                         -1,
                         QueryTriggerInteraction.Ignore);
                     foreach (Collider c in standingOverlaps)
                     {
-                        if (c != m_Controller)
+                        if (c != Controller)
                         {
                             return false;
                         }
@@ -563,11 +567,15 @@ namespace Unity.FPS.Gameplay
             return true;
         }
 
-        public void Teleport(Vector3 targetPos)
+        public void Teleport(Vector3 targetPos, float duration)
         {
-            m_Controller.enabled = false;
-            transform.position = targetPos;
-            m_Controller.enabled = true;
+            transform.DOMove(targetPos, duration); //.OnComplete(OnCompleteTeleport);
+            // m_Controller.enabled = false;
+            // transform.position = targetPos;
         }
+
+        // private void OnCompleteTeleport()
+        // {
+        // }
     }
 }
